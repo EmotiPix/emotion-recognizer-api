@@ -13,8 +13,6 @@
   after_success:
     - pip install awscli
     - export PATH=$PATH:$HOME/.local/bin
-    - export AWS_ACCESS_KEY_ID
-    - export AWS_SECRET_ACCESS_KEY
     - $(aws ecr get-login --region us-east-2)    
     - docker tag emotipix:latest 439810592139.dkr.ecr.us-east-2.amazonaws.com/emotipix:latest
     - docker push 439810592139.dkr.ecr.us-east-2.amazonaws.com/emotipix:latest
