@@ -4,6 +4,8 @@
     - docker
   before_install:
     - docker build -t emotipix .
+  script:
+  - echo "hello"
   after_success:
     - pip install --user awscli
     - export PATH=$PATH:$HOME/.local/bin
