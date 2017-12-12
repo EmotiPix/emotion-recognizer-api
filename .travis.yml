@@ -22,5 +22,5 @@
     - aws ecs update-service --region us-east-2 --cluster python --service python --task-definition python --desired-count 0
     - aws ecs register-task-definition --region us-east-2 --family python --cli-input-json file://`pwd`/$JSON_FILE
     - TASK_REVISION=`aws ecs describe-task-definition --region us-east-2 --task-definition python | egrep "revision" | tr "/" " " | awk '{print $2}' | sed 's/"$//'`
-    - echo "New task revision: "$TASK_REVISION
+    - echo $TASK_REVISION
     - aws ecs update-service --region us-east-2 --cluster python --service python --task-definition python:${TASK_REVISION} --desired-count 2
