@@ -13,8 +13,8 @@
   after_success:
     - pip install awscli
     - export PATH=$PATH:$HOME/.local/bin
-    - $(aws ecr get-login --region us-east-2)    
-    - aws ecs update-service --cluster python --service python --task-definition python
+    - $(aws ecr get-login --region us-east-2)
     - docker tag emotipix:latest 439810592139.dkr.ecr.us-east-2.amazonaws.com/emotipix:latest
     - docker push 439810592139.dkr.ecr.us-east-2.amazonaws.com/emotipix:latest
+    - aws ecs update-service --region us-east-2 --cluster python --service python --task-definition python
     
