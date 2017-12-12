@@ -14,6 +14,7 @@
     - pip install awscli
     - export PATH=$PATH:$HOME/.local/bin
     - $(aws ecr get-login --region us-east-2)    
+    - aws ecs update-service --cluster python --service python --task-definition python
     - docker tag emotipix:latest 439810592139.dkr.ecr.us-east-2.amazonaws.com/emotipix:latest
     - docker push 439810592139.dkr.ecr.us-east-2.amazonaws.com/emotipix:latest
     
