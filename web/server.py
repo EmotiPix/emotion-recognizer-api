@@ -1,7 +1,8 @@
+import json
 from flask import Flask
 from flask import request
 from flask_cors import CORS
-from emotion_handler import recognize_emotion
+from emotion_handler import recognize_emotion, emotions_list
 
 app = Flask(__name__)
 CORS(app)
@@ -14,6 +15,12 @@ def hello_world():
 def get_emotion():
     image_data = request.get_data()
     return recognize_emotion(image_data)
+
+@app.route("/list/emotions", methods=["GET"])
+def get_available_emotions():
+    return json.dumps(emotions_list())
+
+
 
 
 if __name__ == '__main__':
