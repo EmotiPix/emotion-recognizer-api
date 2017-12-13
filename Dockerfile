@@ -1,11 +1,14 @@
-FROM ubuntu:latest
-RUN apt-get update -y
-RUN apt-get update && apt-get install -y \
-	python-pip \
-	python-dev \
-	build-essential
+FROM continuumio/miniconda
+
+RUN apt-get update
+RUN apt-get install -y \
+	build-essential \
+	apt-utils \
+	libgtk2.0-dev
+
 COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
+RUN conda install -c menpo opencv
 ENTRYPOINT ["python"]
 CMD ["web/server.py"]
