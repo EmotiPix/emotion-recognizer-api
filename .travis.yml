@@ -14,11 +14,9 @@
 
   jobs:
     include:
-      - stage: build docker image
+      - stage: build docker image and push
         script:
           - docker build -t emotipix .
-      - stage: push docker to aws
-        script:
           - pip install awscli
           - export PATH=$PATH:$HOME/.local/bin
           - $(aws ecr get-login --region us-east-2)
