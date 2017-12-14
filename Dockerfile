@@ -10,5 +10,6 @@ COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 RUN conda install -c menpo opencv
+WORKDIR /app/web
 ENTRYPOINT ["python"]
-CMD ["web/server.py"]
+CMD ["server.py"]

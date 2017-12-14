@@ -32,13 +32,10 @@ def recognize_emotion(json_data):
         f.write(plain_data)
 
     cropped_face, face_detected = convert_image(TMP_IMAGE_STORAGE, IMAGE_FILE)
-    # if(face_detected):
-    #     emotion = predict_emotion(cropped_face, EMOTIONS_LIST)
-    # else:
-    #     emotion = NO_EMOTION
-
-    # temporarily return random emotion
-    emotion = EMOTIONS_LIST[randint(0,5)]
+    if(face_detected):
+        emotion = predict_emotion(cropped_face, EMOTIONS_LIST)
+    else:
+        emotion = NO_EMOTION
 
     # remove temporarily saved images from TMP_IMAGE_STORAGE
     directory_cleanup(TMP_IMAGE_STORAGE)
