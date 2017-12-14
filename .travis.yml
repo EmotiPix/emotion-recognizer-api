@@ -15,7 +15,7 @@
     - $(aws ecr get-login --region us-east-2)
     - docker tag emotipix:latest 439810592139.dkr.ecr.us-east-2.amazonaws.com/emotipix:latest
     - docker push 439810592139.dkr.ecr.us-east-2.amazonaws.com/emotipix:latest
-    - JSON_CONTENT='{"containerDefinitions":[{"entryPoint":["python"],"portMappings":[{"hostPort":80,"protocol":"tcp","containerPort":5000}],"command":["web/server.py"],"cpu":10,"environment":[],"mountPoints":[],"memory":128,"volumesFrom":[],"image":"439810592139.dkr.ecr.us-east-2.amazonaws.com/emotipix:latest","essential":true,"name":"python"}],"family":"python","volumes":[],"placementConstraints":[]}'
+    - JSON_CONTENT='{"containerDefinitions":[{"entryPoint":["python"],"portMappings":[{"hostPort":80,"protocol":"tcp","containerPort":5000}],"command":["server.py"],"cpu":10,"environment":[],"mountPoints":[],"memory":128,"volumesFrom":[],"image":"439810592139.dkr.ecr.us-east-2.amazonaws.com/emotipix:latest","essential":true,"name":"python"}],"family":"python","volumes":[],"placementConstraints":[]}'
     - JSON_FILE=test.json
     - echo $JSON_CONTENT > $JSON_FILE
     - aws ecs register-task-definition --region us-east-2 --family python --cli-input-json file://`pwd`/$JSON_FILE
