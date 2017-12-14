@@ -24,6 +24,9 @@
           - docker push 439810592139.dkr.ecr.us-east-2.amazonaws.com/emotipix:latest
       - stage: update ECS
         script:
+          - pip install awscli
+          - export PATH=$PATH:$HOME/.local/bin
+          - $(aws ecr get-login --region us-east-2)
           - JSON_CONTENT='{"containerDefinitions":[{"entryPoint":["python"],"portMappings":[{"hostPort":80,"protocol":"tcp","containerPort":5000}],"command":["server.py"],"cpu":10,"environment":[],"mountPoints":[],"memory":128,"volumesFrom":[],"image":"439810592139.dkr.ecr.us-east-2.amazonaws.com/emotipix:latest","essential":true,"name":"python"}],"family":"python","volumes":[],"placementConstraints":[]}'
           - JSON_FILE=test.json
           - echo $JSON_CONTENT > $JSON_FILE
