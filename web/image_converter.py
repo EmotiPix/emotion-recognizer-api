@@ -1,8 +1,8 @@
 import cv2
 
 FACECASCADE = cv2.CascadeClassifier("./models/haarcascade_frontalface_default.xml")
-GRAY_IMAGE_FILE = '/gray_img.jpg'
-CROPPED_FACE_FILE = '/cropped_face_img.jpg'
+# GRAY_IMAGE_FILE = '/gray_img.jpg'
+# CROPPED_FACE_FILE = '/cropped_face_img.jpg'
 
 def convert_image(image_storage, image_name):
     image = cv2.imread(image_name)
@@ -16,11 +16,11 @@ def convert_image(image_storage, image_name):
     for (x, y, w, h) in face:
         cv2.rectangle(gray, (x, y), (x+w, y+h), (0, 0, 0), 2)
 
-    cv2.imwrite(image_storage + GRAY_IMAGE_FILE, gray)
+    # cv2.imwrite(image_storage + GRAY_IMAGE_FILE, gray)
 
     if len(face) == 1:
         face_slice = crop_face(clahe_image, face)
-        cv2.imwrite(image_storage + CROPPED_FACE_FILE, face_slice)
+        # cv2.imwrite(image_storage + CROPPED_FACE_FILE, face_slice)
         face_detected = True
     else:
         face_slice = None

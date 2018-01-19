@@ -2,13 +2,14 @@ import json
 import urlparse
 import os
 import copy
+import time
 from random import randint
 from image_converter import convert_image
 from fishface_classifier import predict_emotion
 
 
 TMP_IMAGE_STORAGE = './tmp_img_storage'
-IMAGE_FILE = TMP_IMAGE_STORAGE + '/img.jpg'
+# IMAGE_FILE = TMP_IMAGE_STORAGE + '/img.jpg'
 
 EMOTIONS_LIST = ['neutral', 'anger', 'disgust', 'happy', 'sadness', 'surprise']
 NO_EMOTION = 'no_emotion'
@@ -28,6 +29,8 @@ def recognize_emotion(json_data):
     if not os.path.exists(TMP_IMAGE_STORAGE):
         os.makedirs(TMP_IMAGE_STORAGE)
 
+    timestr = time.strftime("%Y%m%d-%H%M%S")
+    IMAGE_FILE = TMP_IMAGE_STORAGE + '/img'+ timestr +'.jpg'
     with open(IMAGE_FILE, 'wb') as f:
         f.write(plain_data)
 
@@ -37,8 +40,9 @@ def recognize_emotion(json_data):
     else:
         emotion = NO_EMOTION
 
-    # remove temporarily saved images from TMP_IMAGE_STORAGE
-    directory_cleanup(TMP_IMAGE_STORAGE)
+    # remove temporarily saved image from TMP_IMAGE_STORAGE
+    remove_file(os.path.join(TMP_IMAGE_STORAGE, IMAGE_FILE))
+
 
     return emotion
 
@@ -52,3 +56,10 @@ def directory_cleanup(directory_path):
                 os.unlink(file_path)
         except Exception as e:
             print(e)
+
+def remove_file(file_path):
+    try:
+        if os.path.isfile(file_path):
+            os.unlink(file_path)
+    except Exception as e:
+        print(e)
